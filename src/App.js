@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getImages, searchImages } from './api';
-import Pagination from "react-js-pagination";
 import './App.css';
 
 
