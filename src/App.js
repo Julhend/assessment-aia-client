@@ -3,56 +3,44 @@ import { getImages, searchImages } from './api';
 import Pagination from "react-js-pagination";
 import './App.css';
 
+
 const App = () => {
 	const [imageList, setImageList] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 
-	const [activePage, setActivePage] = useState(1);
-	const [total, setTotal] = useState();
+	const defaultPerPage = '21'
+	const defaultPage = '1'
 
 	useEffect(() => {
-		const fetchData = async (page) => {
-			const responseJson = await getImages(page);
+		const fetchData = async (perPage,page) => {
+			const responseJson = await getImages(defaultPerPage,page);
 			setImageList(responseJson.photos.photo);
 		};
 
 		fetchData();
 	}, []);
 
-
 	const handleFormSubmit = async (event) => {
 		event.preventDefault();
-
-		const responseJson = await searchImages(searchValue);
+		const responseJson = await searchImages(searchValue,defaultPerPage,defaultPage);
 		setImageList(responseJson.photos.photo);
 	};
 
 	const resetForm = async () => {
-		const responseJson = await getImages();
+		const responseJson = await getImages(defaultPerPage,defaultPage);
 		setImageList(responseJson.photos.photo);
-
 		setSearchValue('');
 	};
-
-	const handlePageChange = async (page) => {
-		const responseJson = await getImages(page);
-		setImageList((currentImageList) => [
-					...currentImageList,
-					...responseJson.photos.photo,
-				]);
-				setTotal(responseJson.photos.perpage)
-				setActivePage(page);
-		setActivePage(page);
-	  }
 
 	return (
 		<>
 			<form onSubmit={handleFormSubmit}>
+				<label>AIA Assessment</label>
 				<input
 					value={searchValue}
 					onChange={(event) => setSearchValue(event.target.value)}
 					required='required'
-					placeholder='Enter a search value...'
+					placeholder='Search ...'
 				></input>
 				<button type='submit'>Search</button>
 				<button type='button' onClick={resetForm}>
@@ -64,15 +52,6 @@ const App = () => {
 					<img src={image.images} alt={image.id}></img>
 				))}
 			</div>
-			{/* <Pagination
-        activePage={activePage}
-        totalItemsCount={total}
-        onChange={handlePageChange}
-        prevPageText="Previous"
-        nextPageText="Next"
-        itemClass="page-item"
-        linkClass="page-link"
-      /> */}
 		</>
 	);
 };

@@ -6,27 +6,32 @@ form {
 
 @media only screen and (min-width: 960px) {
 	form {
-		grid-template-columns: 5fr 1fr 1fr;
+		grid-template-columns: 3fr 2fr 1fr 1fr;
 	}
 }
-
-form input {
-	padding: 14px;
-	border: 3px solid rgb(225, 225, 225);
-	border-radius: 10px;
-	box-sizing: border-box;
-	font-size: 32px;
-}
-
-form button {
+form label{
 	border: none;
 	border-radius: 10px;
 	font-size: 32px;
 	padding: 16px;
 }
+form input {
+	padding: 14px;
+	border: 1px solid rgb(225, 225, 225);
+	border-radius: 10px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+
+form button {
+	border: none;
+	border-radius: 10px;
+	font-size: 20px;
+	padding: 16px;
+}
 
 form button[type='button'] {
-	background-color: rgb(254, 80, 80);
+	background-color: rgb(80, 150, 254);
 }
 
 img {
